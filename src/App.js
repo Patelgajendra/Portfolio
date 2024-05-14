@@ -1,24 +1,41 @@
-import logo from './logo.svg';
+
 import './App.css';
+import { Banner } from './Components/Banner';
+import { NavBar } from './Components/NavBar';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import  Skills  from './Components/Skills';
+import Project from './Components/Project';
+import Contact from './Components/Contact';
+import { useEffect } from 'react';
+import { Footer } from './Components/Footer';
 
 function App() {
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+        const cursor = document.querySelector(".cursor");
+        const cursor2 = document.querySelector(".cursor2");
+        cursor.style.cssText = cursor2.style.cssText = `left: ${e.clientX}px; top: ${e.clientY}px;`;
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+        document.removeEventListener("mousemove", handleMouseMove);
+    };
+}, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+   <NavBar/>
+   <Banner/>
+    <Skills/>
+    <Project/>
+    
+    <Contact/>
+    
+    <Footer/>
+    <div className="cursor"></div>
+            <div className="cursor2"></div>
+    </>
   );
 }
 
